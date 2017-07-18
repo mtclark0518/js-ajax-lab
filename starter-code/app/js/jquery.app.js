@@ -8,16 +8,17 @@
 $(document).ready(function(){
 // $('#submit').click(function(event){
 // 	event.preventDefault();
-
+var thing;
 
 	var kitty = $.get( "https://ga-cat-rescue.herokuapp.com/api/cats")
 		.done(function(data){
-		console.log(data) ;
-		var thing = JSON.parse(kitty.responseText);
-		console.log(thing);
-		console.log(thing[0]);
-
+		 thing = JSON.parse(kitty.responseText);
+		 var catUl = $('#cats');
+		 for(i=0; i<thing.length; i++){
+		 var catList = document.createElement("li");
+		 catList.appendChild(thing[i]);
+		 catUl.appendChild(catList);
+		}
 	});
 	
-
 });
