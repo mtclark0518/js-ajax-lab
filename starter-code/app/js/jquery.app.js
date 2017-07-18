@@ -5,6 +5,8 @@
 
 
 var catUl = $('#cats');
+var thing;
+
 $(document).ready(function(){
 
 
@@ -27,24 +29,8 @@ $('#submit').click(function(event){
 			success: function(){
 		 		location.reload();
 		 	}
-		 });
-
-
 		});
-	
-
-	// document.createElement('li');
-	// userCats.append(userInput);
-	// catUl.append(userCats);
-	// console.log(userInput);
-
-
-
-
-
-
-
-var thing;
+	});
 
 	var kitty = $.get( "https://ga-cat-rescue.herokuapp.com/api/cats")
 		.done(function(data){
@@ -56,7 +42,4 @@ var thing;
 		 catUl.append(catList);
 		}
 	});
-	
-
-
 });
