@@ -35,7 +35,7 @@ $(document).ready(function(){
 	var kitty = $.get( "https://ga-cat-rescue.herokuapp.com/api/cats")
 		.done(function(data){
 		 parsedShit = JSON.parse(kitty.responseText);
-		 for(i=0; i<thing.length; i++){
+		 for(i=0; i<parsedShit.length; i++){
 		 var catList = document.createElement("li");
 		 catList.append(parsedShit[i].name + " - " + parsedShit[i].note);
 		 catUl.append(catList);
