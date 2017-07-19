@@ -1,27 +1,26 @@
 
-
-
-
-
-
 var catUl = $('#cats');
-var thing;
+var parsedShit;
+var OutgoingCat;
 
 $(document).ready(function(){
 
 
-var OutgoingCat = function(){
-	this.name = $('#cat-name').val();
-	this.note = $('#cat-note').val();
+	//pulls user data
+	OutgoingCat = function(){
+		this.name = $('#cat-name').val();
+		this.note = $('#cat-note').val();
 	};
 	
-
-$('#submit').click(function(event){
-	event.preventDefault();
-
-	var userCat = new OutgoingCat();
-	var userString = JSON.stringify(userCat);
-	console.log(userString);
+	//////////////
+	//USER CLICK/
+	$('#submit').click(function(event){
+		event.preventDefault();
+		var userCat = new OutgoingCat();
+		var userString = JSON.stringify(userCat);
+		console.log(userString);
+		
+		//add user data to db
 		$.ajax({
 			type: "post",
 			url: "https://ga-cat-rescue.herokuapp.com/api/cats",
@@ -32,14 +31,15 @@ $('#submit').click(function(event){
 		});
 	});
 
+	//gets data from db
 	var kitty = $.get( "https://ga-cat-rescue.herokuapp.com/api/cats")
 		.done(function(data){
-		 thing = JSON.parse(kitty.responseText);
+		 parsedShit = JSON.parse(kitty.responseText);
 		 for(i=0; i<thing.length; i++){
 		 var catList = document.createElement("li");
-
-		 catList.append(thing[i].name + " - " + thing[i].note);
+		 catList.append(parsedShit[i].name + " - " + parsedShit[i].note);
 		 catUl.append(catList);
 		}
 	});
+
 });
