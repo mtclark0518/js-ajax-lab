@@ -1,5 +1,7 @@
 
 var catUl = $('#cats');
+var catList = document.createElement("li");
+
 var parsedShit;
 var OutgoingCat;
 
@@ -14,19 +16,29 @@ $(document).ready(function(){
 	
 	//////////////
 	//USER CLICK/
+
+//var catList = document.createElement("li");<----------------for reference - this is at the top
+
 	$('#submit').click(function(event){
+
 		event.preventDefault();
 		var userCat = new OutgoingCat();
 		var userString = JSON.stringify(userCat);
-		console.log(userString);
+		// console.log(userString);
 		
 		//add user data to db
 		$.ajax({
 			type: "post",
 			url: "https://ga-cat-rescue.herokuapp.com/api/cats",
 		 	data: userString,
-			success: function(){
-		 		location.reload();
+			success: function(userString){
+		 		var myCat = JSON.parse(userString);
+		 		var newCat = document.createElement('li');
+				newCat.append(myCat.name + " - " + myCat.note);
+				catUl.append(newCat);
+		 		$('#cat-name').val('');
+		 		$('#cat-note').val('');
+
 		 	}
 		});
 	});
